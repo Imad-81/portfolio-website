@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef, MouseEvent } from 'react';
+import { useState, useRef, MouseEvent, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, useInView } from 'framer-motion';
 import { FiX, FiArrowUpRight } from 'react-icons/fi';
+import { useLenis } from 'lenis/react';
 
 type Project = {
     id: number;
@@ -18,14 +19,14 @@ const projects: Project[] = [
     {
         id: 1,
         name: 'CUT',
-        tagline: 'AI-Powered Calorie Tracker',
-        description: 'A high-performance calorie tracker designed for precision and speed. CUT leverages AI to simplify food logging through natural language input and provides a streamlined, high-contrast interface.',
+        tagline: 'Automated nutritional analytics engine driven by natural language processing and real-time state estimation.',
+        description: 'Engineered as a high-performance nutritional logic platform, CUT utilizes natural language processing to abstract away manual data entry. It employs a resilient, state-driven architecture via Zustand and Next.js App Router to instantly recalculate macro-nutritional distributions upon data ingestion. Built adhering to a strict "Obsidian Edge" design philosophy, focusing on depth, velocity, and an anti-gravity user experience.',
         features: [
-            'AI-powered natural language meal logging',
-            'Real-time macro HUD tracking',
-            'Progress ring with instant visual feedback',
-            'Analytics dashboard',
-            'Monochrome high-end design system',
+            'Natural language parsing layer for automated dietary logging routines',
+            'Concurrent, real-time macro calculation and localized HUD state updates',
+            'Progress and deficit modeling relative to Total Daily Energy Expenditure (TDEE)',
+            'Strict monochromatic design system emphasizing data visibility',
+            'Zero-latency interface interactions powered by Framer Motion and React Server Components',
         ],
         tech: ['Next.js 15+', 'Framer Motion', 'Tailwind CSS 4', 'Zustand'],
         github: 'https://github.com/Imad-81',
@@ -33,13 +34,14 @@ const projects: Project[] = [
     {
         id: 2,
         name: 'ML_BOT_MARK5',
-        tagline: 'Crypto Trading Algorithm',
-        description: 'A real, deployable ML-based trading bot built on historical ETHUSD data. Modular system with multiple strategy prototypes and advanced LSTM-based trade classification.',
+        tagline: 'Autonomous trade execution system driven by time-series inference and rule-based risk logic.',
+        description: 'A production-grade algorithmic trading architecture trained on large-scale historical datasets (ETHUSD). It synthesizes complex technical indicators—Williams Fractals, directional EMAs, and ADX—with advanced predictive models including XGBoost and LSTMs. The pipeline strictly segregates signal generation, trade simulation, and feature engineering to ensure robust backtesting devoid of data leakage.',
         features: [
-            'Multiple strategy prototypes: Fractals + EMA',
-            'Advanced LSTM model for trade classification',
-            'XGBoost pipeline',
-            'Stratified cross-validation',
+            'LSTM and XGBoost ensemble model for probability-driven trade classification',
+            'Numba-optimized iterative simulation logic handling 200MB+ dataset payloads',
+            'Multi-timeframe Support/Resistance and fractal breakout detection algorithms',
+            'Advanced evaluation pipeline utilizing SMOTE dataset balancing and Focal Loss tuning',
+            'Dynamic Stop-Loss/Take-Profit management to optimize trailing R:R ratios',
         ],
         tech: ['Python', 'TensorFlow', 'XGBoost', 'Pandas'],
         github: 'https://github.com/Imad-81',
@@ -47,12 +49,13 @@ const projects: Project[] = [
     {
         id: 3,
         name: 'noCap',
-        tagline: 'AI Slang Decoder',
-        description: 'A premium AI-powered slang analyzer that decodes modern slang. Built with privacy in mind — runs entirely offline using local LLMs.',
+        tagline: 'Privacy-first linguistic analysis engine utilizing localized large language models for semantic decoding.',
+        description: 'An offline, secure semantic analyzer structured around Next.js and localized Mistral-7B models. noCap removes cloud dependency, processing linguistic shifts directly on local hardware via LM Studio. The frontend logic bridges to the local inference server using a custom API layer, ensuring zero-footprint data transfer while maintaining a zero-latency tactile interface.',
         features: [
-            'Privacy-first AI running on local LLMs',
-            'Glassmorphism dark-mode interface',
-            'Real-time local inference',
+            'Complete localized inference stack ensuring 100% data processing privacy',
+            'RESTful bridging between a React App Router and LM Studio inference endpoints',
+            'Optimized execution layer utilizing the Bun JavaScript runtime and TurboPack',
+            'Premium dark-mode glassmorphism aesthetics with granular physics-based rendering',
         ],
         tech: ['Next.js', 'Bun', 'LM Studio', 'Mistral 7B'],
         github: 'https://github.com/Imad-81',
@@ -60,12 +63,13 @@ const projects: Project[] = [
     {
         id: 4,
         name: 'Smart Campus',
-        tagline: 'Crowd Management Vision',
-        description: 'Real-time crowd monitoring system using YOLOv8 computer vision to detect occupancy levels and provide predictive analytics.',
+        tagline: 'Real-time perception system for crowd density estimation using computer vision pipelines.',
+        description: 'A multi-modal perception ecosystem that pipes continuous YOLOv8 inferences from remote video streams into a unified dashboard. The Python-based vision backend asynchronously detects occupancy patterns and forwards structured payload telemetry to a FastAPI interface. The React frontend consumes this pipeline, driving dynamic predictive analytics for crowd forecasting.',
         features: [
-            'Real-time people detection using YOLOv8',
-            'Dynamic crowd classification',
-            'Predictive analytics engine',
+            'YOLOv8 hardware-accelerated computer vision loop for precise spatial detection',
+            'Asynchronous FastAPI backend mapping detection frames into serialized JSON REST streams',
+            'Predictive routing algorithms that account for temporal anomalies and event-driven patterns',
+            'Live-updating React dashboard rendering synchronous crowd state feedback and classifications',
         ],
         tech: ['YOLOv8', 'OpenCV', 'FastAPI', 'React'],
         github: 'https://github.com/Imad-81',
@@ -73,12 +77,13 @@ const projects: Project[] = [
     {
         id: 5,
         name: 'AI Humanizer',
-        tagline: 'Text Humanization Pipeline',
-        description: 'Robust automation pipeline that rewrites AI-generated text into natural, academic, human-like style. Optimized for local LLMs.',
+        tagline: 'Language transformation pipeline using semantic inference and stylistic reconstruction.',
+        description: 'A robust text-transformation pipeline engineered to transcribe synthetic generation into natural, academic, human-like cadence. Utilizing NLP semantic parsing combined with Mistral-7B length-aware prompt engineering, it heavily dampens synthetic identifiers to resist modern AI detection arrays.',
         features: [
-            'Human-centric rewriting',
-            'Academic tone preservation',
-            'Length-preserving mode',
+            'Strict length and contextual preservation utilizing complex LLM heuristic constraints',
+            'Seamless integration with LM Studio for highly secure offline transcription tasks',
+            'Rule-based processing layers utilizing NLTK and Regex to inject deterministic structural variations',
+            'Multi-stage evaluation filtering content for target academic and stylistic criteria',
         ],
         tech: ['Python', 'Mistral-7B', 'NLTK', 'Regex'],
         github: 'https://github.com/Imad-81',
@@ -86,12 +91,13 @@ const projects: Project[] = [
     {
         id: 6,
         name: 'CampusTasks',
-        tagline: 'Student Micro-Task Market',
-        description: 'Modern marketplace for university students. Facilitates peer-to-peer assistance through micro-tasks and study materials.',
+        tagline: 'Distributed task fulfillment platform driven by peer-to-peer interaction and gamified incentive structures.',
+        description: 'A full-stack distributed task fulfillment platform tailored for academic environments. Integrates secure request lifecycle logic, gamified contribution tracking, and complex state management to facilitate modular peer-to-peer micro-tasks within a structured virtual marketplace.',
         features: [
-            'Dynamic task marketplace',
-            'Full task lifecycle management',
-            'Gamification and leaderboards',
+            'Comprehensive task state machine managing object lifecycles from creation to fulfillment',
+            'Secure authenticated session handling bundled with local storage state persistence',
+            'Global leaderboard utilizing gamified reputational metrics to reward system integration',
+            'Deeply customized interface utilizing bespoke variable-based CSS in a React 19 / Vite environment',
         ],
         tech: ['React 19', 'Vite', 'Vanilla CSS'],
         github: 'https://github.com/Imad-81/Design_Thinking1',
@@ -183,6 +189,23 @@ function TiltCard({ project, onClick, index }: { project: Project; onClick: () =
 }
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+    const lenis = useLenis();
+
+    useEffect(() => {
+        // Prevent scrolling on the body when the modal is open
+        document.body.style.overflow = 'hidden';
+        if (lenis) {
+            lenis.stop();
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+            if (lenis) {
+                lenis.start();
+            }
+        };
+    }, [lenis]);
+
     return (
         <motion.div
             className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
