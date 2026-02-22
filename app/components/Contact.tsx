@@ -2,8 +2,8 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FiMail, FiPhone, FiGithub, FiLinkedin, FiArrowRight, FiSend } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
+import { FiMail, FiPhone, FiSend } from 'react-icons/fi';
+import { sendEmail } from '../actions/sendEmail';
 
 export default function Contact() {
     const ref = useRef(null);
@@ -20,14 +20,16 @@ export default function Contact() {
         setStatus('idle');
 
         try {
-            await emailjs.sendForm(
-                process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-                process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-                formRef.current,
-                process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-            );
-            setStatus('success');
-            formRef.current.reset();
+            const formData = new FormData(formRef.current);
+            const res = await sendEmail(formData);
+
+            if (res.error) {
+                console.error(res.error);
+                setStatus('error');
+            } else {
+                setStatus('success');
+                formRef.current.reset();
+            }
         } catch {
             setStatus('error');
         } finally {

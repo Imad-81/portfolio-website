@@ -67,7 +67,7 @@ export default function Hero() {
                     className="mt-6"
                 >
                     <p className="hero-tagline text-lg md:text-2xl font-light tracking-wide text-gray-300">
-                        Systems Builder <span className="mx-2 text-indigo-500">//</span> ML Engineer <span className="mx-2 text-indigo-500">//</span> Algorithmic Trader
+                        Applied AI <span className="mx-2 text-indigo-500">//</span> Software Systems <span className="mx-2 text-indigo-500">//</span> Full-Stack Development
                     </p>
                 </motion.div>
 
