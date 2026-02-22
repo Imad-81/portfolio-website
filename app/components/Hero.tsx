@@ -1,10 +1,10 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
 import { FiGithub, FiLinkedin, FiArrowDown } from 'react-icons/fi';
 import { useRef } from 'react';
 
-const letterVariants = {
+const letterVariants: Variants = {
     hidden: { opacity: 0, y: 100 },
     visible: (i: number) => ({
         opacity: 1,
