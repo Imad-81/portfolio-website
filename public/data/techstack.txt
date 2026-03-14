@@ -1,0 +1,36 @@
+Tech Stack
+
+Languages
+Python
+JavaScript
+TypeScript
+Pine Script
+
+Frontend
+React
+Next.js (App Router)
+
+Backend / Architecture
+Node.js (conceptual understanding through Next.js)
+REST-style architecture
+Modular system design
+
+Data & Quant
+Pandas
+NumPy
+SciPy
+Pandas TA
+
+Machine Learning
+LSTM
+GRU
+BiLSTM
+SMOTE
+Focal Loss
+
+Optimization
+Numba
+
+Version Control & Tools
+Git
+VS Code

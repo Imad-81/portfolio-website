@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
 
@@ -15,9 +15,16 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400", "500", "600", "700"],
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  weight: ["400", "500", "600", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Shaik Imad Uddin | Portfolio",
-  description: "Systems Builder. Trading Systems Developer. AI Enthusiast. Explore my work in ML, full-stack development, and algorithmic trading.",
+  title: "Shaik Imad Uddin — Systems Builder & AI Engineer",
+  description:
+    "Building production-grade trading systems, ML pipelines, and full-stack applications. Explore my work in applied AI, algorithmic trading, and software engineering.",
 };
 
 export default function RootLayout({
@@ -27,8 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jetbrainsMono.variable}`}>
-        {/* Noise overlay removed */}
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
+      >
+        <div className="noise-overlay" aria-hidden="true" />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

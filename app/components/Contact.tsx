@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FiMail, FiPhone, FiSend } from 'react-icons/fi';
+import { FiMail, FiPhone, FiSend, FiCheck, FiAlertCircle } from 'react-icons/fi';
 import { sendEmail } from '../actions/sendEmail';
 
 export default function Contact() {
@@ -38,52 +38,71 @@ export default function Contact() {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center py-20 px-4" id="contact" ref={ref}>
+        <section className="section min-h-screen flex items-center justify-center py-20 px-4" id="contact" ref={ref}>
             <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
                 {/* Left Side: Typography & Info */}
                 <motion.div
-                    initial={{ opacity: 0, x: -50 }}
+                    initial={{ opacity: 0, x: -40 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.8 }}
                 >
-                    <h2 className="text-7xl md:text-8xl font-bold tracking-tighter text-white mb-8 leading-[0.9]">
-                        LET'S <br />
-                        <span className="text-gray-600">WORK</span> <br />
+                    <span
+                        className="block text-xs text-[var(--text-muted)] tracking-widest uppercase mb-4"
+                        style={{ fontFamily: 'var(--font-mono)' }}
+                    >
+                        Get in Touch
+                    </span>
+                    <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-10 leading-[0.9]">
+                        LET&apos;S <br />
+                        <span className="gradient-text">WORK</span> <br />
                         TOGETHER.
                     </h2>
 
-                    <div className="space-y-6 text-lg md:text-xl text-gray-400 font-light">
-                        <a href="mailto:shaikimaduddin10@gmail.com" className="flex items-center gap-4 hover:text-white transition-colors group">
-                            <span className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
-                                <FiMail />
+                    <div className="space-y-5 text-base md:text-lg text-[var(--text-secondary)]">
+                        <a
+                            href="mailto:shaikimaduddin10@gmail.com"
+                            className="flex items-center gap-4 hover:text-white transition-colors group"
+                        >
+                            <span className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all shrink-0">
+                                <FiMail size={16} />
                             </span>
-                            shaikimaduddin10@gmail.com
+                            <span className="text-sm">shaikimaduddin10@gmail.com</span>
                         </a>
                         <div className="flex items-center gap-4">
-                            <span className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
-                                <FiPhone />
+                            <span className="w-11 h-11 rounded-full border border-white/10 flex items-center justify-center shrink-0">
+                                <FiPhone size={16} />
                             </span>
-                            +91 7032866208
+                            <span className="text-sm">+91 7032866208</span>
                         </div>
                     </div>
 
-                    <div className="flex gap-4 mt-12">
-                        <a href="https://github.com/Imad-81" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all uppercase text-sm tracking-widest font-bold">
+                    <div className="flex gap-3 mt-10">
+                        <a
+                            href="https://github.com/Imad-81"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2.5 rounded-full border border-white/10 hover:bg-white hover:text-black transition-all text-xs tracking-widest font-bold uppercase"
+                        >
                             GitHub
                         </a>
-                        <a href="https://www.linkedin.com/in/shaik-imaduddin-a79887390/" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full border border-white/10 hover:bg-[#0077b5] hover:border-[#0077b5] hover:text-white transition-all uppercase text-sm tracking-widest font-bold">
+                        <a
+                            href="https://www.linkedin.com/in/shaik-imaduddin-a79887390/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2.5 rounded-full border border-white/10 hover:bg-[#0077b5] hover:border-[#0077b5] hover:text-white transition-all text-xs tracking-widest font-bold uppercase"
+                        >
                             LinkedIn
                         </a>
                     </div>
                 </motion.div>
 
-                {/* Right Side: Interactive Form */}
+                {/* Right Side: Form */}
                 <motion.div
-                    initial={{ opacity: 0, x: 50 }}
+                    initial={{ opacity: 0, x: 40 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="bg-white/5 backdrop-blur-lg border border-white/10 p-8 md:p-12 rounded-3xl"
+                    className="glass-card p-8 md:p-12 gradient-border"
                 >
                     <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
                         <div className="group relative">
@@ -91,10 +110,10 @@ export default function Contact() {
                                 type="text"
                                 name="from_name"
                                 required
-                                className="w-full bg-transparent border-b border-gray-700 py-4 text-xl text-white outline-none focus:border-white transition-colors peer"
+                                className="w-full bg-transparent border-b border-white/[0.08] py-4 text-lg text-white outline-none focus:border-[var(--accent-violet)] transition-colors peer"
                                 placeholder=" "
                             />
-                            <label className="absolute left-0 top-4 text-gray-500 transition-all peer-focus:-top-6 peer-focus:text-xs peer-focus:text-white peer-not-placeholder-shown:-top-6 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-white pointer-events-none">
+                            <label className="absolute left-0 top-4 text-[var(--text-muted)] text-sm transition-all peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[var(--accent-violet)] peer-not-placeholder-shown:-top-5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-[var(--text-secondary)] pointer-events-none">
                                 Your Name
                             </label>
                         </div>
@@ -104,10 +123,10 @@ export default function Contact() {
                                 type="email"
                                 name="reply_to"
                                 required
-                                className="w-full bg-transparent border-b border-gray-700 py-4 text-xl text-white outline-none focus:border-white transition-colors peer"
+                                className="w-full bg-transparent border-b border-white/[0.08] py-4 text-lg text-white outline-none focus:border-[var(--accent-violet)] transition-colors peer"
                                 placeholder=" "
                             />
-                            <label className="absolute left-0 top-4 text-gray-500 transition-all peer-focus:-top-6 peer-focus:text-xs peer-focus:text-white peer-not-placeholder-shown:-top-6 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-white pointer-events-none">
+                            <label className="absolute left-0 top-4 text-[var(--text-muted)] text-sm transition-all peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[var(--accent-violet)] peer-not-placeholder-shown:-top-5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-[var(--text-secondary)] pointer-events-none">
                                 Email Address
                             </label>
                         </div>
@@ -117,10 +136,10 @@ export default function Contact() {
                                 name="message"
                                 required
                                 rows={4}
-                                className="w-full bg-transparent border-b border-gray-700 py-4 text-xl text-white outline-none focus:border-white transition-colors peer resize-none"
+                                className="w-full bg-transparent border-b border-white/[0.08] py-4 text-lg text-white outline-none focus:border-[var(--accent-violet)] transition-colors peer resize-none"
                                 placeholder=" "
                             />
-                            <label className="absolute left-0 top-4 text-gray-500 transition-all peer-focus:-top-6 peer-focus:text-xs peer-focus:text-white peer-not-placeholder-shown:-top-6 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-white pointer-events-none">
+                            <label className="absolute left-0 top-4 text-[var(--text-muted)] text-sm transition-all peer-focus:-top-5 peer-focus:text-xs peer-focus:text-[var(--accent-violet)] peer-not-placeholder-shown:-top-5 peer-not-placeholder-shown:text-xs peer-not-placeholder-shown:text-[var(--text-secondary)] pointer-events-none">
                                 Message
                             </label>
                         </div>
@@ -128,22 +147,34 @@ export default function Contact() {
                         <button
                             type="submit"
                             disabled={sending}
-                            className="w-full bg-white text-black font-bold py-5 rounded-xl uppercase tracking-widest hover:bg-gray-200 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full py-4 rounded-xl font-bold text-sm uppercase tracking-widest flex items-center justify-center gap-3 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-white border border-[var(--accent-violet)] hover:bg-[var(--accent-violet)] hover:shadow-lg hover:shadow-[var(--accent-violet)]/20"
                         >
-                            {sending ? 'Sending...' : (
-                                <>Send Message <FiSend /></>
+                            {sending ? (
+                                'Sending...'
+                            ) : (
+                                <>Send Message <FiSend size={14} /></>
                             )}
                         </button>
 
                         {status === 'success' && (
-                            <div className="p-4 bg-green-500/10 border border-green-500/20 text-green-400 rounded-lg text-center text-sm">
-                                Message sent successfully. I'll get back to you soon.
-                            </div>
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="flex items-center gap-2 p-4 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-lg text-sm"
+                            >
+                                <FiCheck size={16} />
+                                Message sent. I&apos;ll respond soon.
+                            </motion.div>
                         )}
                         {status === 'error' && (
-                            <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-center text-sm">
+                            <motion.div
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg text-sm"
+                            >
+                                <FiAlertCircle size={16} />
                                 Something went wrong. Please try again.
-                            </div>
+                            </motion.div>
                         )}
                     </form>
                 </motion.div>
