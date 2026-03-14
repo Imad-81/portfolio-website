@@ -314,83 +314,87 @@ function TechStackScene() {
 export default function TechStack() {
     return (
         <section className="section" id="techstack">
-            <div className="max-w-[1200px] mx-auto px-4 md:px-8">
-                {/* Header */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    viewport={{ once: true }}
-                    className="mb-4 text-center"
-                >
-                    <span
-                        className="block text-xs text-[var(--text-muted)] tracking-widest uppercase mb-3"
-                        style={{ fontFamily: 'var(--font-mono)' }}
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+                    {/* Left: Header text + category legend */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        viewport={{ once: true }}
+                        className="flex flex-col justify-center"
                     >
-                        Core Philosophy
-                    </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight max-w-3xl mx-auto">
-                        Exploring how machines{' '}
-                        <span className="gradient-text">perceive, learn, decide,</span>{' '}
-                        and act.
-                    </h2>
-                    <p className="mt-4 text-sm text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-mono)' }}>
-                        Drag to rotate · Hover to explore
-                    </p>
-                </motion.div>
+                        <span
+                            className="block text-xs text-[var(--text-muted)] tracking-widest uppercase mb-3"
+                            style={{ fontFamily: 'var(--font-mono)' }}
+                        >
+                            Core Philosophy
+                        </span>
+                        <h2 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+                            Exploring how machines{' '}
+                            <span className="gradient-text">perceive, learn, decide,</span>{' '}
+                            and act.
+                        </h2>
+                        <p className="mt-4 text-sm text-[var(--text-muted)]" style={{ fontFamily: 'var(--font-mono)' }}>
+                            Drag to rotate · Hover to explore
+                        </p>
 
-                {/* 3D Canvas */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    viewport={{ once: true }}
-                    className="tech-stack-canvas-wrapper"
-                    style={{ width: '100%', height: '620px', position: 'relative' }}
-                >
-                    <Canvas
-                        dpr={[1, 1.5]}
-                        camera={{ position: [0, 0, 9], fov: 50 }}
-                        gl={{ antialias: true, alpha: true }}
-                        style={{ background: 'transparent' }}
+                        {/* Category Legend */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.4 }}
+                            viewport={{ once: true }}
+                            className="flex flex-wrap gap-6 mt-10"
+                        >
+                            {[
+                                { label: 'Languages', color: 'var(--accent-violet)' },
+                                { label: 'Frontend', color: 'var(--accent-cyan)' },
+                                { label: 'Data & ML', color: 'var(--accent-indigo)' },
+                                { label: 'Tools', color: '#339933' },
+                            ].map((cat) => (
+                                <div key={cat.label} className="flex items-center gap-2">
+                                    <span
+                                        className="w-2 h-2 rounded-full"
+                                        style={{ background: cat.color, boxShadow: `0 0 6px ${cat.color}` }}
+                                    />
+                                    <span
+                                        className="text-xs text-[var(--text-muted)] uppercase tracking-wider"
+                                        style={{ fontFamily: 'var(--font-mono)' }}
+                                    >
+                                        {cat.label}
+                                    </span>
+                                </div>
+                            ))}
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Right: 3D Canvas */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        viewport={{ once: true }}
+                        className="tech-stack-canvas-wrapper"
+                        style={{ width: '100%', height: '720px', position: 'relative' }}
                     >
-                        <Suspense fallback={null}>
-                            <TechStackScene />
-                        </Suspense>
-                    </Canvas>
+                        <Canvas
+                            dpr={[1, 1.5]}
+                            camera={{ position: [0, 0, 8], fov: 52 }}
+                            gl={{ antialias: true, alpha: true }}
+                            style={{ background: 'transparent' }}
+                        >
+                            <Suspense fallback={null}>
+                                <TechStackScene />
+                            </Suspense>
+                        </Canvas>
 
-                    {/* Radial fade at edges */}
-                    <div className="tech-stack-vignette" />
-                </motion.div>
+                        {/* Radial fade at edges */}
+                        <div className="tech-stack-vignette" />
+                    </motion.div>
 
-                {/* Category Legend */}
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.4 }}
-                    viewport={{ once: true }}
-                    className="flex flex-wrap justify-center gap-6 mt-6"
-                >
-                    {[
-                        { label: 'Languages', color: 'var(--accent-violet)' },
-                        { label: 'Frontend', color: 'var(--accent-cyan)' },
-                        { label: 'Data & ML', color: 'var(--accent-indigo)' },
-                        { label: 'Tools', color: '#339933' },
-                    ].map((cat) => (
-                        <div key={cat.label} className="flex items-center gap-2">
-                            <span
-                                className="w-2 h-2 rounded-full"
-                                style={{ background: cat.color, boxShadow: `0 0 6px ${cat.color}` }}
-                            />
-                            <span
-                                className="text-xs text-[var(--text-muted)] uppercase tracking-wider"
-                                style={{ fontFamily: 'var(--font-mono)' }}
-                            >
-                                {cat.label}
-                            </span>
-                        </div>
-                    ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );
