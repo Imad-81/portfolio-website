@@ -52,9 +52,10 @@ export default function Navbar() {
             {visible && (
                 <motion.nav
                     className="navbar"
-                    initial={{ y: -100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -100, opacity: 0 }}
+                    style={{ left: '50%' }}
+                    initial={{ y: -100, x: '-50%', opacity: 0 }}
+                    animate={{ y: 0, x: '-50%', opacity: 1 }}
+                    exit={{ y: -100, x: '-50%', opacity: 0 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <div className="navbar-inner">
