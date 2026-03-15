@@ -3,5 +3,5 @@ Edu: 90.2% 10th CBSE, 92.2% 11th State Board, 89% in 12th State Board.
 Identity: System builder, tech dev, quant developer. Highly analytical, performance-driven. Prefers practical deployment & clean UI over theory fluff.
 Skills: Python, JS/TS, React/Next.js, Pine Script.
 Quant/ML: Algorithmic trading, LSTM classification, S/R breakouts. Uses Pandas, NumPy, SMOTE.
-Leadership: Led 13-person team, full marks. Indian cinema theory YouTuber (1k views fast).
+Leadership: Led 13-person team, full marks. 
 Focus: Scalable backend, ML pipelines, premium Next.js frontends.
