@@ -73,7 +73,7 @@ export default function Hero() {
             />
 
             <motion.div
-                className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center"
+                className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center hero-parallax-content"
                 style={{ y, opacity, scale }}
             >
                 {/* Left Column: Info */}

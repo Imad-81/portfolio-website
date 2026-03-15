@@ -11,7 +11,7 @@ import {
     SiTensorflow, SiTailwindcss,
 } from 'react-icons/si';
 import { TbBrandVscode } from 'react-icons/tb';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 
 /* ───────── Data ───────── */
 type TechNode = {
@@ -274,6 +274,14 @@ function RotatingGroup({ children, activeIndex }: { children: React.ReactNode; a
 /* ───────── Main 3D Scene ───────── */
 function TechStackScene() {
     const [activeIndex, setActiveIndex] = useState<number | null>(null);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const positions = useMemo(() => fibonacciSphere(techNodes.length, 3.5), []);
 
@@ -302,6 +310,7 @@ function TechStackScene() {
             <OrbitControls
                 enableZoom={false}
                 enablePan={false}
+                enableRotate={!isMobile}
                 rotateSpeed={0.4}
                 minPolarAngle={Math.PI / 4}
                 maxPolarAngle={(3 * Math.PI) / 4}
@@ -377,7 +386,6 @@ export default function TechStack() {
                         transition={{ duration: 1, delay: 0.2 }}
                         viewport={{ once: true }}
                         className="tech-stack-canvas-wrapper"
-                        style={{ width: '100%', height: '720px', position: 'relative' }}
                     >
                         <Canvas
                             dpr={[1, 1.5]}
