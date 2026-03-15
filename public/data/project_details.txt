@@ -1,0 +1,7 @@
+1. CUT: AI Calorie Tracker. Next.js 15, TS, Framer Motion, Tailwind 4, Zustand. NLP meal logging, macro HUD, progress rings. Premium Obsidian aesthetic.
+2. ML_BOT_MARK5: Python ML Crypto Trading Bot (ETHUSD). LSTM/XGBoost models for trade classification. Features: SMOTE balancers, EMA/Breakout strategies.
+3. noCap: Slang Decoder. Next.js, Tailwind, local LLMs (LM Studio/Mistral). Privacy-first offline AI inference.
+4. Smart Campus Crowd Management: Real-time CV. YOLOv8 (Python) + FastAPI + React UI. Detects canteen occupancy (Low/Med/High).
+5. AI Humanizer: Python automation pipeline. Rewrites AI text into natural academic tone using mistral-7b. Preserves length & facts.
+6. CampusTasks: React 19 Student Micro-task Marketplace. Task bounties, leaderboards, glassmorphism UI.
+7. EduNex: Next.js, Convex, Clerk, Groq API (LLaMA-3). Career mapping engine for Indian students using a proprietary Student Intelligence System.

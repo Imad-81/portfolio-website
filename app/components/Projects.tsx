@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, MouseEvent, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
 import { FiX, FiArrowUpRight } from 'react-icons/fi';
 import { useLenis } from 'lenis/react';
 
@@ -13,13 +13,14 @@ type Project = {
     features: string[];
     tech: string[];
     github?: string;
+    accent: string;
 };
 
 const projects: Project[] = [
     {
         id: 1,
         name: 'CUT',
-        tagline: 'Automated nutritional analytics engine driven by natural language processing and real-time state estimation.',
+        tagline: 'AI-powered nutritional analytics engine with natural language processing and real-time state estimation.',
         description: 'Engineered as a high-performance nutritional logic platform, CUT utilizes natural language processing to abstract away manual data entry. It employs a resilient, state-driven architecture via Zustand and Next.js App Router to instantly recalculate macro-nutritional distributions upon data ingestion. Built adhering to a strict "Obsidian Edge" design philosophy, focusing on depth, velocity, and an anti-gravity user experience.',
         features: [
             'Natural language parsing layer for automated dietary logging routines',
@@ -30,6 +31,7 @@ const projects: Project[] = [
         ],
         tech: ['Next.js 15+', 'Framer Motion', 'Tailwind CSS 4', 'Zustand'],
         github: 'https://github.com/Imad-81',
+        accent: '#ccff00',
     },
     {
         id: 2,
@@ -45,6 +47,7 @@ const projects: Project[] = [
         ],
         tech: ['Python', 'TensorFlow', 'XGBoost', 'Pandas'],
         github: 'https://github.com/Imad-81',
+        accent: '#f59e0b',
     },
     {
         id: 3,
@@ -59,6 +62,7 @@ const projects: Project[] = [
         ],
         tech: ['Next.js', 'Bun', 'LM Studio', 'Mistral 7B'],
         github: 'https://github.com/Imad-81',
+        accent: '#a855f7',
     },
     {
         id: 4,
@@ -73,6 +77,7 @@ const projects: Project[] = [
         ],
         tech: ['YOLOv8', 'OpenCV', 'FastAPI', 'React'],
         github: 'https://github.com/Imad-81',
+        accent: '#06b6d4',
     },
     {
         id: 5,
@@ -87,6 +92,7 @@ const projects: Project[] = [
         ],
         tech: ['Next.js', 'Convex', 'Clerk', 'Groq AI'],
         github: 'https://github.com/Imad-81/sip_edunex',
+        accent: '#3b82f6',
     },
     {
         id: 6,
@@ -101,6 +107,7 @@ const projects: Project[] = [
         ],
         tech: ['React 19', 'Vite', 'Vanilla CSS'],
         github: 'https://github.com/Imad-81/Design_Thinking1',
+        accent: '#10b981',
     },
 ];
 
@@ -108,25 +115,21 @@ function TiltCard({ project, onClick, index }: { project: Project; onClick: () =
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
-    const mouseX = useSpring(x);
-    const mouseY = useSpring(y);
+    const mouseX = useSpring(x, { stiffness: 200, damping: 30 });
+    const mouseY = useSpring(y, { stiffness: 200, damping: 30 });
 
-    const rotateX = useTransform(mouseY, [-0.5, 0.5], ['15deg', '-15deg']);
-    const rotateY = useTransform(mouseX, [-0.5, 0.5], ['-15deg', '15deg']);
+    const rotateX = useTransform(mouseY, [-0.5, 0.5], ['8deg', '-8deg']);
+    const rotateY = useTransform(mouseX, [-0.5, 0.5], ['-8deg', '8deg']);
 
     function onMouseMove(e: MouseEvent<HTMLDivElement>) {
         const rect = e.currentTarget.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseXVal = e.clientX - rect.left;
-        const mouseYVal = e.clientY - rect.top;
-        const xPct = mouseXVal / width - 0.5;
-        const yPct = mouseYVal / height - 0.5;
+        const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+        const yPct = (e.clientY - rect.top) / rect.height - 0.5;
         x.set(xPct);
         y.set(yPct);
 
-        e.currentTarget.style.setProperty('--mouse-x', `${mouseXVal}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${mouseYVal}px`);
+        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     }
 
     function onMouseLeave() {
@@ -136,52 +139,68 @@ function TiltCard({ project, onClick, index }: { project: Project; onClick: () =
 
     return (
         <motion.div
-            style={{
-                perspective: 1000,
-            }}
-            initial={{ opacity: 0, y: 50 }}
+            style={{ perspective: 800 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.08 }}
             viewport={{ once: true }}
         >
             <motion.div
-                style={{
-                    rotateX,
-                    rotateY,
-                    transformStyle: 'preserve-3d',
-                }}
+                style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
                 onMouseMove={onMouseMove}
                 onMouseLeave={onMouseLeave}
                 onClick={onClick}
-                className="group relative h-full cursor-pointer bg-white/5 border border-white/10 p-8 rounded-2xl overflow-hidden transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:shadow-2xl hover:shadow-indigo-500/20"
+                className="group relative h-full cursor-pointer rounded-2xl overflow-hidden transition-all duration-300"
             >
-                {/* Spotlight Gradient */}
+                {/* Gradient top border */}
                 <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    className="absolute top-0 left-0 right-0 h-[2px]"
                     style={{
-                        background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%)'
+                        background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`,
+                        opacity: 0.6,
                     }}
                 />
 
-                <div style={{ transform: 'translateZ(20px)' }}>
-                    <span className="block text-xs font-mono text-gray-500 mb-4 tracking-widest">0{project.id}</span>
-                    <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
-                    <p className="text-sm text-gray-400 mb-6 font-mono">{project.tagline}</p>
+                <div className="relative bg-[var(--glass-bg)] border border-white/[0.06] rounded-2xl p-8 h-full hover:border-white/[0.12] hover:bg-[var(--glass-bg-hover)] transition-all duration-300">
+                    {/* Spotlight */}
+                    <div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
+                        style={{
+                            background: `radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${project.accent}08, transparent 40%)`,
+                        }}
+                    />
 
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                        {project.tech.slice(0, 3).map((t) => (
-                            <span key={t} className="text-[10px] uppercase tracking-wider border border-white/10 px-2 py-1 rounded bg-black/20 text-gray-400">
-                                {t}
+                    <div style={{ transform: 'translateZ(15px)' }}>
+                        <div className="flex items-center justify-between mb-6">
+                            <span
+                                className="text-xs text-[var(--text-muted)] tracking-widest"
+                                style={{ fontFamily: 'var(--font-mono)' }}
+                            >
+                                0{project.id}
                             </span>
-                        ))}
-                    </div>
-                </div>
+                            <FiArrowUpRight
+                                size={18}
+                                className="text-[var(--text-muted)] group-hover:text-white transition-colors duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transform"
+                            />
+                        </div>
 
-                <div
-                    className="absolute bottom-6 right-6 text-gray-600 group-hover:text-white transition-colors duration-300"
-                    style={{ transform: 'translateZ(10px)' }}
-                >
-                    <FiArrowUpRight size={24} />
+                        <h3 className="text-2xl font-bold text-white mb-3">{project.name}</h3>
+                        <p className="text-sm text-[var(--text-secondary)] mb-8 leading-relaxed line-clamp-3">
+                            {project.tagline}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                            {project.tech.map((t) => (
+                                <span
+                                    key={t}
+                                    className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/[0.06] bg-white/[0.02] text-[var(--text-muted)]"
+                                    style={{ fontFamily: 'var(--font-mono)' }}
+                                >
+                                    {t}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </motion.div>
         </motion.div>
@@ -192,17 +211,11 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
     const lenis = useLenis();
 
     useEffect(() => {
-        // Prevent scrolling on the body when the modal is open
         document.body.style.overflow = 'hidden';
-        if (lenis) {
-            lenis.stop();
-        }
-
+        if (lenis) lenis.stop();
         return () => {
             document.body.style.overflow = '';
-            if (lenis) {
-                lenis.start();
-            }
+            if (lenis) lenis.start();
         };
     }, [lenis]);
 
@@ -215,62 +228,86 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
             onClick={onClose}
         >
             <motion.div
-                className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 md:p-12 overflow-y-auto max-h-[90vh]"
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                className="relative w-full max-w-2xl rounded-2xl overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
                 onClick={(e) => e.stopPropagation()}
-                style={{ boxShadow: '0 0 50px rgba(0,0,0,0.5)' }}
             >
-                <button
-                    onClick={onClose}
-                    className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors"
+                {/* Gradient Header Bar */}
+                <div
+                    className="h-1"
+                    style={{
+                        background: `linear-gradient(90deg, ${project.accent}, var(--accent-violet))`,
+                    }}
+                />
+
+                <div
+                    className="bg-[#0a0a0a] border border-white/[0.06] border-t-0 rounded-b-2xl p-8 md:p-12 overflow-y-auto max-h-[85vh]"
+                    style={{ boxShadow: `0 0 60px ${project.accent}15` }}
                 >
-                    <FiX size={24} />
-                </button>
+                    <button
+                        onClick={onClose}
+                        className="absolute top-8 right-8 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-[var(--text-muted)] hover:text-white hover:border-white/30 transition-all"
+                    >
+                        <FiX size={16} />
+                    </button>
 
-                <div className="mb-8">
-                    <span className="text-xs font-mono text-indigo-400 tracking-widest uppercase mb-2 block">Project Details</span>
-                    <h2 className="text-4xl font-bold text-white mb-4">{project.name}</h2>
-                    <p className="text-gray-400 leading-relaxed text-lg">{project.description}</p>
-                </div>
-
-                <div className="space-y-8">
-                    <div>
-                        <h3 className="text-sm font-bold text-gray-300 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Key Features</h3>
-                        <ul className="space-y-3">
-                            {project.features.map((f, i) => (
-                                <li key={i} className="flex items-start gap-3 text-gray-400 text-sm">
-                                    <span className="text-indigo-500 mt-1">▹</span>
-                                    {f}
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="mb-8">
+                        <span className="text-xs tracking-widest uppercase mb-2 block" style={{ color: project.accent, fontFamily: 'var(--font-mono)' }}>
+                            Project Details
+                        </span>
+                        <h2 className="text-4xl font-bold text-white mb-4">{project.name}</h2>
+                        <p className="text-[var(--text-secondary)] leading-relaxed text-lg">{project.description}</p>
                     </div>
 
-                    <div>
-                        <h3 className="text-sm font-bold text-gray-300 uppercase tracking-wider mb-4 border-b border-white/10 pb-2">Technology</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {project.tech.map((t) => (
-                                <span key={t} className="text-xs font-mono text-gray-400 border border-white/10 px-3 py-1.5 rounded-full">
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-
-                    {project.github && (
-                        <div className="pt-6">
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-wide hover:bg-gray-200 transition-colors"
+                    <div className="space-y-8">
+                        <div>
+                            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-4 pb-2 border-b border-white/[0.06]"
+                                style={{ fontFamily: 'var(--font-mono)' }}
                             >
-                                View on GitHub <FiArrowUpRight />
-                            </a>
+                                Key Features
+                            </h3>
+                            <ul className="space-y-3">
+                                {project.features.map((f, i) => (
+                                    <li key={i} className="flex items-start gap-3 text-[var(--text-secondary)] text-sm leading-relaxed">
+                                        <span style={{ color: project.accent }} className="mt-1.5 text-xs">▸</span>
+                                        {f}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    )}
+
+                        <div>
+                            <h3 className="text-xs font-bold text-[var(--text-secondary)] uppercase tracking-widest mb-4 pb-2 border-b border-white/[0.06]"
+                                style={{ fontFamily: 'var(--font-mono)' }}
+                            >
+                                Technology
+                            </h3>
+                            <div className="flex flex-wrap gap-2">
+                                {project.tech.map((t) => (
+                                    <span key={t} className="text-xs text-[var(--text-secondary)] border border-white/[0.08] px-3 py-1.5 rounded-full" style={{ fontFamily: 'var(--font-mono)' }}>
+                                        {t}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        {project.github && (
+                            <div className="pt-4">
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-bold text-sm uppercase tracking-wide text-black transition-all hover:opacity-90"
+                                    style={{ background: project.accent }}
+                                >
+                                    View on GitHub <FiArrowUpRight />
+                                </a>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </motion.div>
         </motion.div>
@@ -290,11 +327,18 @@ export default function Projects() {
                     viewport={{ once: true }}
                     className="mb-16"
                 >
-                    <span className="block text-xs font-mono text-gray-500 tracking-widest uppercase mb-2">Selected Works</span>
-                    <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">Projects</h2>
+                    <span
+                        className="block text-xs text-[var(--text-muted)] tracking-widest uppercase mb-3"
+                        style={{ fontFamily: 'var(--font-mono)' }}
+                    >
+                        Selected Works
+                    </span>
+                    <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
+                        Projects
+                    </h2>
                 </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {projects.map((project, index) => (
                         <TiltCard
                             key={project.id}
