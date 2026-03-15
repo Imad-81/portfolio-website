@@ -78,19 +78,6 @@ export default function Hero() {
             >
                 {/* Left Column: Info */}
                 <div className="flex flex-col items-start text-left shrink-0 w-full mx-auto lg:mx-0 pr-0 lg:pr-8">
-                    {/* Status Badge */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.8 }}
-                        className="mb-8"
-                    >
-                        <span className="status-badge" style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-                            <span className="pulse-dot" />
-                            Open to Opportunities
-                        </span>
-                    </motion.div>
-
                     {/* Name */}
                     <div className="mb-6 flex flex-col items-start w-full">
                         <h1 className="text-[14vw] sm:text-[10vw] md:text-[8vw] lg:text-[6.5vw] xl:text-[6vw] font-bold leading-[0.9] tracking-tighter text-white">
