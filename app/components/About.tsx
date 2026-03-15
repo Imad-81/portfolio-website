@@ -55,22 +55,14 @@ export default function About() {
                         <div className="space-y-4 text-[var(--text-secondary)] text-base leading-relaxed">
                             <p>
                                 I'm a B.Tech student focused on building real systems — not just studying them.
+                            </p>
+
+                            <p>
                                 My work spans <span className="text-white font-medium">applied AI</span>,
                                 <span className="text-white font-medium"> algorithmic trading</span>, and
-                                <span className="text-white font-medium"> full-stack platforms</span>.
-                            </p>
-
-                            <p>
-                                From machine learning trading models processing large datasets to
-                                AI-powered SaaS products serving real users, I approach engineering
-                                with a systems mindset — designing pipelines that
-                                <span className="text-white font-medium"> process data, make decisions,
-                                    and execute reliably.</span>
-                            </p>
-
-                            <p>
-                                I focus on building systems that are scalable, automated, and
-                                capable of operating in real production environments.
+                                <span className="text-white font-medium"> full-stack platforms</span>,
+                                with an emphasis on scalable pipelines that process data, make decisions,
+                                and execute reliably.
                             </p>
                         </div>
                     </motion.div>
