@@ -1,5 +1,5 @@
-Name: Shaik Imad Uddin (India, B.Tech 2nd Sem)
-Edu: 90.2% 10th CBSE, 92.2% 11th State Board, 89% in 12th State Board.
+Name: Shaik Imad Uddin (India Hyderabad, B.Tech AIML 2nd Sem, Woxsen University)
+Edu: 90.2% 10th CBSE, 91.4% 11th State Board, 87.6% in 12th State Board.
 Identity: System builder, tech dev, quant developer. Highly analytical, performance-driven. Prefers practical deployment & clean UI over theory fluff.
 Skills: Python, JS/TS, React/Next.js, Pine Script.
 Quant/ML: Algorithmic trading, LSTM classification, S/R breakouts. Uses Pandas, NumPy, SMOTE.

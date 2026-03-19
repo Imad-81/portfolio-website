@@ -94,6 +94,14 @@ export default function Contact() {
                         >
                             LinkedIn
                         </a>
+                        <a
+                            href="/Resume_Imad.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="px-5 py-2.5 rounded-full border border-white/10 hover:bg-[var(--accent-violet)] hover:border-[var(--accent-violet)] hover:text-white transition-all text-xs tracking-widest font-bold uppercase"
+                        >
+                            Resume
+                        </a>
                     </div>
                 </motion.div>
 

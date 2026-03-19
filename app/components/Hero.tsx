@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';
-import { FiGithub, FiLinkedin, FiArrowDown } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiArrowDown, FiFileText } from 'react-icons/fi';
 import { useRef } from 'react';
 import ChatWindow from './ChatWindow';
 
@@ -129,6 +129,15 @@ export default function Hero() {
                             className="group w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-[var(--text-secondary)] hover:text-[#0077b5] hover:border-[#0077b5]/30 hover:bg-[#0077b5]/5 transition-all duration-300"
                         >
                             <FiLinkedin size={20} />
+                        </a>
+                        <a
+                            href="/Resume_Imad.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Resume"
+                            className="group w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--accent-violet)] hover:border-[var(--accent-violet)]/30 hover:bg-[var(--accent-violet)]/5 transition-all duration-300"
+                        >
+                            <FiFileText size={20} />
                         </a>
                     </motion.div>
                 </div>
