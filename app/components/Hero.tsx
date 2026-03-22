@@ -56,12 +56,9 @@ export default function Hero() {
     return (
         <section
             ref={containerRef}
-            className="relative flex items-center justify-center min-h-screen overflow-hidden pt-20 pb-10"
+            className="relative flex items-center justify-center min-h-screen overflow-hidden pt-20 pb-10 bg-black"
             id="home"
         >
-            {/* Animated Gradient Mesh Background */}
-            <div className="hero-gradient-mesh" />
-
             {/* Grid Pattern */}
             <div
                 className="absolute inset-0 opacity-[0.03]"
